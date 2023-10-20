@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: back
+  name: back-deploy
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: back
+  template:
+    metadata:
+      labels:
+        app: back
+    spec:
+      containers:
+      - image: krmp-d2hub-idock.9rum.cc/dev-test/repo_08e027367fad:latest
+        name: back
+        ports:
+        - containerPort: 8080
+          name: back-container
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: back
+  name: back-svc
+  namespace: default
+spec:
+  type: ClusterIP
+  ports:
+  - protocol: TCP
+    targetPort: 8080
+    port: 8080
+  selector:
+    app: back
