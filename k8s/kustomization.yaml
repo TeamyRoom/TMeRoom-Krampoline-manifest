@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+images:
+- name: krmp-d2hub-idock.9rum.cc/dev-test/repo_08e027367fad
+  newName: tmeroom-spring
+  newTag: "prod"
+resources:
+- ../base
